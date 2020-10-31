@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net"
 	"os"
+	"time"
 )
 
 func handleErr(e error) {
@@ -12,6 +13,17 @@ func handleErr(e error) {
 	}
 	fmt.Fprintf(os.Stderr, "Error: %v\n", e)
 	os.Exit(1)
+}
+
+func handleConnection(conn net.Conn) {
+	interval := 3 * time.Second
+
+	for t := range time.Tick(interval) {
+		_, err := conn.Write([]byte(fmt.Sprintf("Hello whoever is connected!\nThe time is: %v\n", t)))
+		handleErr(err)
+	}
+
+	conn.Close()
 }
 
 func main() {
@@ -23,9 +35,10 @@ func main() {
 	handleErr(err)
 
 	for {
-		_, err := listener.Accept()
+		conn, err := listener.Accept()
 		handleErr(err)
 
 		fmt.Println("Accepted connection!")
+		go handleConnection(conn)
 	}
 }
