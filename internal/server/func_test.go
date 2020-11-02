@@ -51,7 +51,7 @@ func TestServerFunctional(t *testing.T) {
 		},
 		{
 			request:  "ALL\n",
-			response: "OK defined words: messi, fun, secret\n",
+			response: "OK defined words: fun, messi, secret\n",
 		},
 		{
 			request:  "SET fb foo bar\n",
