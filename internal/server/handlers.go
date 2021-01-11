@@ -2,6 +2,7 @@ package server
 
 import (
 	"fmt"
+	"sort"
 	"strings"
 )
 
@@ -53,5 +54,6 @@ func allHandler(s *Server, args []string) string {
 		words = append(words, k)
 	}
 
+	sort.Strings(words)
 	return "OK defined words: " + strings.Join(words, ", ")
 }

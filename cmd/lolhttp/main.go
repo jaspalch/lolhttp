@@ -26,8 +26,8 @@ func main() {
 	address := "127.0.0.1"
 	port := "1456"
 
-	server := server.NewServer(dict)
+	srv := server.NewServer(dict)
 
-	err := server.Listen(net.JoinHostPort(address, port))
+	err := srv.Listen(net.JoinHostPort(address, port))
 	handleErr(err)
 }

@@ -22,21 +22,21 @@ type Server struct {
 // NewServer creates a new instance of Server and
 // initializes the Server's word dictionary
 func NewServer(dict map[string]string) *Server {
-	server := Server{}
+	s := Server{}
 
-	server.dict = make(map[string]string)
+	s.dict = make(map[string]string)
 	for k, v := range dict {
-		server.dict[k] = v
+		s.dict[k] = v
 	}
-	server.allowedMethods = []string{"GET", "SET", "CLEAR", "ALL"}
-	server.methodHandlers = make(map[string]methodHandler)
+	s.allowedMethods = []string{"GET", "SET", "CLEAR", "ALL"}
+	s.methodHandlers = make(map[string]methodHandler)
 
-	server.registerHandler("GET", getHandler)
-	server.registerHandler("SET", setHandler)
-	server.registerHandler("CLEAR", clearHandler)
-	server.registerHandler("ALL", allHandler)
+	s.registerHandler("GET", getHandler)
+	s.registerHandler("SET", setHandler)
+	s.registerHandler("CLEAR", clearHandler)
+	s.registerHandler("ALL", allHandler)
 
-	return &server
+	return &s
 }
 
 // Listen starts the Server on the provided address
